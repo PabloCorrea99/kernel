@@ -5,9 +5,7 @@ from pathlib import Path
 
 class Kernel:
     def __init__(self) -> None:
-        self.estado = 1
-        self.puerto_archivos = '8001'
-        self.puerto_aplicaciones = '8002'
+        pass
     
     def initializer(self):
         if sys.argv[1] == '-start':
