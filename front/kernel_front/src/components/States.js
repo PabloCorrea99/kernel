@@ -1,5 +1,5 @@
 import React, {useEffect} from 'react';
-import { Button } from 'react-bootstrap';
+import Button from '@mui/material/Button';
 
 function States() {
   const [systemStates, setSystemStates] = React.useState([])
@@ -86,7 +86,7 @@ function States() {
               <li><h3>Applications: {state.kernel_state}</h3></li>
             </ul>
           ))}
-          <Button variant="warning" onClick={(e)=>handleSubmit(e,'exit')} >EXIT SYSTEM</Button>
+          <Button variant="outlined" color="error" onClick={(e)=>handleSubmit(e,'exit')} >DETENER SISTEMA</Button>
       </div>
     );
   }

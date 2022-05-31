@@ -1,4 +1,4 @@
-import { Button } from "react-bootstrap";
+import Button from '@mui/material/Button';
 
 function Application() {
 
@@ -38,8 +38,8 @@ function Application() {
   return (
     <div>
         <h1>Applications</h1>
-        <Button onClick={(e)=>handleSubmit(e,'run')} variant="success">INICIAR</Button>
-        <Button onClick={(e)=>handleSubmit(e,'stop')} variant="warning">DETENER</Button>
+        <Button onClick={(e)=>handleSubmit(e,'run')} variant="outlined" color="success">INICIAR</Button>
+        <Button onClick={(e)=>handleSubmit(e,'stop')} variant="outlined" color="warning">DETENER</Button>
     </div>
   );
 }

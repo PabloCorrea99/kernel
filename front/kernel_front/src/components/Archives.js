@@ -1,5 +1,6 @@
 import React from "react";
-import { Button } from "react-bootstrap";
+import Button from '@mui/material/Button';
+import TextField from '@mui/material/TextField';
 
 function Archives() {
     const [archiveName, setArchiveName] = React.useState('');
@@ -45,14 +46,9 @@ function Archives() {
     return (
       <div>
           <h1>Archives</h1>
-            <input
-                onChange={handleChange}
-                value={archiveName}
-                placeholder="Nombre del directorio..."
-                type="text"
-            />
-            <Button onClick={(e)=>handleSubmit(e,'create')} variant="success">CREAR</Button>
-            <Button onClick={(e)=>handleSubmit(e,'delete')} variant="warning">BORRAR</Button>
+            <TextField id="outlined-basic" label="Outlined" variant="outlined" onChange={handleChange} value={archiveName}/>
+            <Button onClick={(e)=>handleSubmit(e,'create')} variant="contained" color="success">CREAR</Button>
+            <Button onClick={(e)=>handleSubmit(e,'delete')} variant="contained" color="warning">BORRAR</Button>
       </div>
     );
   }
