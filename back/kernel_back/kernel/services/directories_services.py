@@ -17,6 +17,8 @@ class Directories_Service:
         self.method = operation
         if operation == 'start':
             self.service_state = self.start_service()
+        elif operation == 'exit':
+            self.service_state = self.stop_service()
 
         
     def start_service(self):
@@ -50,15 +52,36 @@ class Directories_Service:
         return s
 
     def manage_directory(self, name):
-        print(name)
         s = self.connect_to_service()
-        print(f"{self.method}{SEPARATOR}{name}")
         s.send(f"{self.method}{SEPARATOR}{name}".encode())
+        response = b''
         while True:
             # read the bytes from the file
             bytes_read = s.recv(BUFFER_SIZE)
             if not bytes_read:
                 # file transmitting is done
                 break
-            print(bytes_read)
+            else:
+                response += bytes_read 
         s.close()
+        return response
+
+    def stop_service(self):
+        s = self.connect_to_service()
+        s.send(f"{self.method}{SEPARATOR}".encode())
+        state = 1
+        while True:
+            # read the bytes from the file
+            bytes_read = s.recv(BUFFER_SIZE)
+            if not bytes_read:
+                # file transmitting is done
+                break
+            state = int(bytes_read)
+            if state == 0:
+                break
+        s.close()
+        if state == 0:
+            print("[+] Directory Service Stopped")
+        else:
+            print("[-] Oops we couldn't stop the service")
+        return state

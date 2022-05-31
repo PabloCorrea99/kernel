@@ -21,4 +21,5 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('initialize/', views.initialize),
     path('action/', views.kernel_operations_view),
+    path('exit/', views.shut_down),
 ]

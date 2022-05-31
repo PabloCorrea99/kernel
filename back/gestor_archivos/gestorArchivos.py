@@ -29,8 +29,10 @@ def startSockets():
         send_message(client_socket)
     elif msg[0] == "create":
         create_directory(msg[1], client_socket)
-    elif msg[0] == "EXIT":
-        exit(0)
+    elif msg[0] == "delete":
+        delete_directory(msg[1], client_socket)
+    elif msg[0] == "exit":
+        exit_service(client_socket)
 
     s.close()
 
@@ -40,15 +42,32 @@ def send_message(client_socket):
 
 def create_directory(name, client_socket):
     data = {}
-    print(name)
     try:
         path = os.path.join(DIR, name)
         os.mkdir(path)
         data = json.dumps({'status':1, 'result':name})
     except Exception as e:
-        data = json.dumps({'status':0, 'result':e})
+        data = json.dumps({'status':0, 'result':str(e)})
     print(data)
-    client_socket.send_all(data)
+    client_socket.sendall(data.encode())
+
+def delete_directory(name, client_socket):
+    data = {}
+    try:
+        path = os.path.join(DIR, name)
+        os.rmdir(path)
+        data = json.dumps({'status':1, 'result':name})
+    except Exception as e:
+        data = json.dumps({'status':0, 'result':str(e)})
+    print(data)
+    client_socket.sendall(data.encode())
+
+def exit_service(client_socket):
+    data = b'0'
+    client_socket.sendall(data)
+    print("[+] Service stopped")
+    client_socket.close()
+    exit(0)
 
     
     

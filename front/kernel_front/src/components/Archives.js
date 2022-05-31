@@ -48,10 +48,10 @@ function Archives() {
             <input
                 onChange={handleChange}
                 value={archiveName}
-                placeholder="Escribe un mensaje..."
+                placeholder="Nombre del directorio..."
                 type="text"
             />
-            <Button onClick={(e)=>handleSubmit(e,'creat')} variant="success">CREAR</Button>
+            <Button onClick={(e)=>handleSubmit(e,'create')} variant="success">CREAR</Button>
             <Button onClick={(e)=>handleSubmit(e,'delete')} variant="warning">BORRAR</Button>
       </div>
     );
